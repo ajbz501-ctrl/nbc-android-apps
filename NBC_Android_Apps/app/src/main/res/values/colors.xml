@@ -1,0 +1,9 @@
+<resources>
+    <color name="nbc_navy">#071A2B</color>
+    <color name="nbc_teal">#18A98B</color>
+    <color name="nbc_teal_dark">#0F806D</color>
+    <color name="nbc_gold">#F9C74F</color>
+    <color name="nbc_ice">#F4F8F8</color>
+    <color name="nbc_muted">#5B6B78</color>
+    <color name="nbc_line">#DCE7E8</color>
+</resources>
