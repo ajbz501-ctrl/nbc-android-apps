@@ -3,11 +3,13 @@ package bz.nationalbus.nbc;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
 import android.widget.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -40,12 +42,13 @@ public class MainActivity extends Activity {
         LinearLayout row=new LinearLayout(this);row.setGravity(Gravity.CENTER_VERTICAL);ImageView logo=new ImageView(this);logo.setImageResource(R.drawable.nbc_logo);logo.setScaleType(ImageView.ScaleType.FIT_CENTER);row.addView(logo,new LinearLayout.LayoutParams(dp(48),dp(48)));
         LinearLayout names=box();TextView brand=txt("NATIONAL BUS",11,GOLD);brand.setTypeface(null,1);names.addView(brand);TextView page=txt(title,21,Color.WHITE);page.setTypeface(null,1);names.addView(page);row.addView(names,new LinearLayout.LayoutParams(0,-2,1));
         if(api.loggedIn()){Button out=btn("Sign out",false);out.setTextColor(Color.WHITE);out.setBackgroundColor(Color.TRANSPARENT);out.setOnClickListener(v->{api.logout();home();});row.addView(out,new LinearLayout.LayoutParams(dp(82),dp(44)));}bar.addView(row);root.addView(bar);
-        ScrollView scroll=new ScrollView(this);content=box();content.setPadding(dp(20),dp(20),dp(20),dp(28));scroll.addView(content);root.addView(scroll,new LinearLayout.LayoutParams(-1,0,1));root.addView(navBar(),new LinearLayout.LayoutParams(-1,dp(64)));setContentView(root);
+        ScrollView scroll=new ScrollView(this);content=box();content.setPadding(dp(20),dp(20),dp(20),dp(28));scroll.addView(content);root.addView(scroll,new LinearLayout.LayoutParams(-1,0,1));LinearLayout nav=navBar();root.addView(nav,new LinearLayout.LayoutParams(-1,dp(70)));setContentView(root);
+        root.setOnApplyWindowInsetsListener((v,insets)->{int bottom=Build.VERSION.SDK_INT>=30?insets.getInsets(WindowInsets.Type.navigationBars()).bottom:insets.getSystemWindowInsetBottom();nav.setPadding(dp(8),dp(5),dp(8),dp(5)+bottom);ViewGroup.LayoutParams lp=nav.getLayoutParams();lp.height=dp(70)+bottom;nav.setLayoutParams(lp);return insets;});root.requestApplyInsets();
     }
     private void authShell(boolean staff){
         LinearLayout root=box();root.setBackgroundColor(ICE);LinearLayout hero=box();hero.setGravity(Gravity.CENTER);hero.setPadding(dp(24),dp(18),dp(24),dp(20));hero.setBackgroundResource(R.drawable.login_hero);ImageView logo=new ImageView(this);logo.setImageResource(R.drawable.nbc_logo);logo.setScaleType(ImageView.ScaleType.FIT_CENTER);hero.addView(logo,new LinearLayout.LayoutParams(dp(116),dp(132)));TextView n=txt("NATIONAL BUS COMPANY",14,GOLD);n.setTypeface(null,1);n.setGravity(Gravity.CENTER);hero.addView(n);TextView m=txt(staff?"OPERATIONS PORTAL":"PASSENGER APP",12,Color.WHITE);m.setGravity(Gravity.CENTER);hero.addView(m);root.addView(hero,new LinearLayout.LayoutParams(-1,dp(250)));ScrollView scroll=new ScrollView(this);content=box();content.setPadding(dp(22),dp(22),dp(22),dp(24));content.setBackgroundResource(R.drawable.auth_panel);scroll.addView(content);LinearLayout.LayoutParams panel=new LinearLayout.LayoutParams(-1,0,1);panel.setMargins(dp(14),dp(-8),dp(14),dp(14));root.addView(scroll,panel);TextView foot=txt("Secure access to NBC services",12,MUTED);foot.setGravity(Gravity.CENTER);root.addView(foot,new LinearLayout.LayoutParams(-1,dp(30)));setContentView(root);
     }
-    private LinearLayout navBar(){LinearLayout nav=new LinearLayout(this);nav.setGravity(Gravity.CENTER);nav.setPadding(dp(8),dp(5),dp(8),dp(5));nav.setBackgroundColor(Color.WHITE);String[] labels=ops?new String[]{"⌂\nDashboard","▤\nRuns","✓\nScanner","▣\nMore"}:new String[]{"⌂\nHome","▣\nTickets","⌕\nTrips","♙\nProfile"};View.OnClickListener[] clicks=ops?new View.OnClickListener[]{v->operationsHome(),v->runs(),v->scan(),v->manifest()}:new View.OnClickListener[]{v->passengerHome(),v->myTicket(),v->searchTrips(),v->login(false)};for(int i=0;i<labels.length;i++){Button b=btn(labels[i],false);b.setTextSize(11);b.setTextColor(i==0?TEAL:MUTED);b.setBackgroundColor(Color.TRANSPARENT);b.setOnClickListener(clicks[i]);nav.addView(b,new LinearLayout.LayoutParams(0,dp(54),1));}return nav;}
+    private LinearLayout navBar(){LinearLayout nav=new LinearLayout(this);nav.setGravity(Gravity.TOP);nav.setPadding(dp(8),dp(5),dp(8),dp(5));nav.setBackgroundColor(Color.WHITE);String[] labels=ops?new String[]{"⌂\nDashboard","▤\nRuns","✓\nScanner","▣\nMore"}:new String[]{"⌂\nHome","▣\nTickets","⌕\nTrips","♙\nProfile"};View.OnClickListener[] clicks=ops?new View.OnClickListener[]{v->operationsHome(),v->runs(),v->scan(),v->manifest()}:new View.OnClickListener[]{v->passengerHome(),v->myTicket(),v->searchTrips(),v->login(false)};for(int i=0;i<labels.length;i++){Button b=btn(labels[i],false);b.setTextSize(12);b.setPadding(0,0,0,0);b.setTextColor(i==0?TEAL:MUTED);b.setBackgroundColor(Color.TRANSPARENT);b.setOnClickListener(clicks[i]);nav.addView(b,new LinearLayout.LayoutParams(0,dp(60),1));}return nav;}
     private void action(String icon,String title,String desc,View.OnClickListener click){LinearLayout c=card(),row=new LinearLayout(this);row.setGravity(Gravity.CENTER_VERTICAL);TextView i=txt(icon,25,TEAL);i.setGravity(Gravity.CENTER);row.addView(i,new LinearLayout.LayoutParams(dp(38),dp(42)));LinearLayout copy=box();TextView t=txt(title,17,NAVY);t.setTypeface(null,1);copy.addView(t);copy.addView(small(desc));row.addView(copy,new LinearLayout.LayoutParams(0,-2,1));c.addView(row);c.setOnClickListener(click);add(c);}
     private void home(){if(ops){if(api.loggedIn())operationsHome();else login(true);}else passengerHome();}
 
@@ -74,9 +77,16 @@ public class MainActivity extends Activity {
         LinearLayout c=card();TextView heading=txt(title,16,NAVY);heading.setTypeface(null,1);c.addView(heading);c.addView(small(detail));add(c);
     }
 
+    private View routeSelector(String dot,String label,Spinner spinner,int color){
+        LinearLayout row=new LinearLayout(this);row.setGravity(Gravity.CENTER_VERTICAL);row.setPadding(dp(10),dp(5),dp(8),dp(5));row.setBackgroundResource(R.drawable.rounded_input);
+        TextView marker=txt(dot,20,color);marker.setGravity(Gravity.CENTER);row.addView(marker,new LinearLayout.LayoutParams(dp(34),dp(54)));
+        LinearLayout copy=box();TextView caption=txt(label,11,MUTED);caption.setTypeface(null,1);copy.addView(caption);spinner.setMinimumHeight(dp(42));copy.addView(spinner,new LinearLayout.LayoutParams(-1,dp(46)));row.addView(copy,new LinearLayout.LayoutParams(0,dp(72),1));
+        return row;
+    }
+
     private void passengerHome(){
         shell("NBC Traveler");add(h1("Where will you go?"));add(small("Book your next journey across Belize."));
-        LinearLayout search=card();LinearLayout route=new LinearLayout(this);route.setGravity(Gravity.CENTER_VERTICAL);TextView fromDot=txt("●",18,TEAL);route.addView(fromDot,new LinearLayout.LayoutParams(dp(28),-2));LinearLayout fromBox=box();fromBox.addView(txt("FROM",11,NAVY));Spinner from=new Spinner(this);fromBox.addView(from);route.addView(fromBox,new LinearLayout.LayoutParams(0,-2,1));route.addView(txt("→",27,GOLD),new LinearLayout.LayoutParams(dp(34),-2));TextView toDot=txt("●",18,Color.rgb(205,157,39));route.addView(toDot,new LinearLayout.LayoutParams(dp(28),-2));LinearLayout toBox=box();toBox.addView(txt("TO",11,NAVY));Spinner to=new Spinner(this);toBox.addView(to);route.addView(toBox,new LinearLayout.LayoutParams(0,-2,1));search.addView(route);gap(search);
+        LinearLayout search=card();Spinner from=new Spinner(this),to=new Spinner(this);search.addView(routeSelector("●","FROM",from,TEAL));TextView arrow=txt("↓",24,GOLD);arrow.setGravity(Gravity.CENTER);search.addView(arrow,new LinearLayout.LayoutParams(-1,dp(34)));search.addView(routeSelector("●","TO",to,Color.rgb(205,157,39)));gap(search);
         LinearLayout chips=new LinearLayout(this);EditText date=field("Today");date.setText("Today, "+new SimpleDateFormat("MMM d",Locale.US).format(new Date()));chips.addView(date,new LinearLayout.LayoutParams(0,dp(48),1));Space gap=new Space(this);chips.addView(gap,new LinearLayout.LayoutParams(dp(8),1));TextView passenger=txt("1 passenger",15,NAVY);passenger.setGravity(Gravity.CENTER);passenger.setBackgroundResource(R.drawable.rounded_input);chips.addView(passenger,new LinearLayout.LayoutParams(0,dp(48),1));search.addView(chips);gap(search);Button find=btn("Search trips  →",true);search.addView(find);add(search);TextView status=small("Loading active routes…");add(status);
         loadStops(from,to,status);find.setOnClickListener(v->{ArrayList<Integer> ids=(ArrayList<Integer>)from.getTag();if(ids==null||ids.isEmpty()){toast("Routes are still loading.");return;}tripResults(ids.get(from.getSelectedItemPosition()),ids.get(to.getSelectedItemPosition()),date.getText().toString());});
         add(h1("Upcoming trip"));if(api.loggedIn())loadUpcoming();else{LinearLayout sign=card();sign.addView(txt("Your upcoming tickets will appear here.",16,NAVY));Button b=btn("Sign in to view tickets",false);b.setOnClickListener(v->login(false));sign.addView(b);add(sign);}add(small("NBC Traveler v1.4 • Secure booking and digital tickets"));
