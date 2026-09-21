@@ -1,4 +1,4 @@
-# NBC Android Apps v1.4 Reference Design
+# NBC Android Apps v1.4.2
 
 Two separate APKs are produced from this project:
 
@@ -7,7 +7,15 @@ Two separate APKs are produced from this project:
 
 The app uses the API guide v9.9.0 and posts Odoo JSON-RPC requests to `https://nationalbusbelize.com` with the session cookie returned by `/web/session/authenticate`. It does not open the website in a browser and does not collect card PAN/CVC data.
 
-The v1.4 interface follows the NBC product rendering: a Traveler dashboard with From/To/date search, upcoming trip cards, boarding-pass presentation, QR/ticket status, and a focused bottom navigation; Operations includes an assigned-run hero card, quick actions, live tracking, and run progress. Login accepts only email/username and password; the Odoo database is resolved internally.
+The interface follows the NBC product rendering: a Traveler dashboard with From/To/date search, upcoming trip cards, boarding-pass presentation, QR/ticket status, and a focused bottom navigation; Operations includes an assigned-run hero card, quick actions, live tracking, and run progress. Login accepts only email/username and password; the Odoo database is resolved internally.
+
+## v1.4.2 navigation update
+
+- Android and in-app back navigation from secondary screens.
+- Passenger tabs: Home, My Trips, Boards, Account.
+- Public arrival/departure boards through `/api/nbc/status_board`.
+- Operations live-run controls for start, active runs, and end tracking.
+- Booking search stays on Home; purchased journeys and tickets are under My Trips.
 
 ## Build
 
@@ -24,4 +32,4 @@ app/build/outputs/apk/apk/passenger/debug/app-passenger-debug.apk
 app/build/outputs/apk/apk/operations/debug/app-operations-debug.apk
 ```
 
-Before production release, set the real Odoo database name in the sign-in screen and configure a release signing key. The backend must grant the signed-in user the corresponding NBC roles.
+Before production release, configure a release signing key. The backend must grant Operations users the corresponding NBC roles.
