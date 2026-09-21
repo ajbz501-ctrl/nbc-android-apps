@@ -1,0 +1,4 @@
+buildscript {
+    repositories { maven { url uri('/workspace/scratch/c71af4acc5f9/toolchain/maven-cache/google') }; maven { url uri('/workspace/scratch/c71af4acc5f9/toolchain/maven-cache') }; google(); mavenCentral() }
+    dependencies { classpath 'com.android.tools.build:gradle:8.9.1' }
+}
