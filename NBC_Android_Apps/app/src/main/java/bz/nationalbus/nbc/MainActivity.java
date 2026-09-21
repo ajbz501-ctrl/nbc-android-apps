@@ -49,6 +49,31 @@ public class MainActivity extends Activity {
     private void action(String icon,String title,String desc,View.OnClickListener click){LinearLayout c=card(),row=new LinearLayout(this);row.setGravity(Gravity.CENTER_VERTICAL);TextView i=txt(icon,25,TEAL);i.setGravity(Gravity.CENTER);row.addView(i,new LinearLayout.LayoutParams(dp(38),dp(42)));LinearLayout copy=box();TextView t=txt(title,17,NAVY);t.setTypeface(null,1);copy.addView(t);copy.addView(small(desc));row.addView(copy,new LinearLayout.LayoutParams(0,-2,1));c.addView(row);c.setOnClickListener(click);add(c);}
     private void home(){if(ops){if(api.loggedIn())operationsHome();else login(true);}else passengerHome();}
 
+    private void login(boolean staff){
+        authShell(staff);add(h1(staff?"Staff sign in":"Welcome back, traveler."));
+        add(small(staff?"Sign in with your NBC operations account.":"Sign in to view tickets and continue a booking."));
+        EditText user=field("Email or username");
+        EditText password=field("Password");password.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        add(user);add(password);Button submit=btn("Sign in securely",true);add(submit);
+        submit.setOnClickListener(v->{
+            String username=user.getText().toString().trim(),secret=password.getText().toString();
+            if(username.isEmpty()||secret.isEmpty()){toast("Enter your username and password.");return;}
+            submit.setEnabled(false);submit.setText("Signing in…");
+            api.login(username,secret,new ApiClient.Callback(){
+                public void done(JSONObject r){runOnUiThread(()->{
+                    JSONObject result=r.optJSONObject("result");
+                    if(result!=null&&result.optInt("uid",0)>0){home();return;}
+                    submit.setEnabled(true);submit.setText("Sign in securely");toast("The username or password is incorrect.");
+                });}
+                public void error(Exception e){runOnUiThread(()->{submit.setEnabled(true);submit.setText("Sign in securely");toast(message(e));});}
+            });
+        });
+    }
+
+    private void cardResult(String title,String detail){
+        LinearLayout c=card();TextView heading=txt(title,16,NAVY);heading.setTypeface(null,1);c.addView(heading);c.addView(small(detail));add(c);
+    }
+
     private void passengerHome(){
         shell("NBC Traveler");add(h1("Where will you go?"));add(small("Book your next journey across Belize."));
         LinearLayout search=card();LinearLayout route=new LinearLayout(this);route.setGravity(Gravity.CENTER_VERTICAL);TextView fromDot=txt("●",18,TEAL);route.addView(fromDot,new LinearLayout.LayoutParams(dp(28),-2));LinearLayout fromBox=box();fromBox.addView(txt("FROM",11,NAVY));Spinner from=new Spinner(this);fromBox.addView(from);route.addView(fromBox,new LinearLayout.LayoutParams(0,-2,1));route.addView(txt("→",27,GOLD),new LinearLayout.LayoutParams(dp(34),-2));TextView toDot=txt("●",18,Color.rgb(205,157,39));route.addView(toDot,new LinearLayout.LayoutParams(dp(28),-2));LinearLayout toBox=box();toBox.addView(txt("TO",11,NAVY));Spinner to=new Spinner(this);toBox.addView(to);route.addView(toBox,new LinearLayout.LayoutParams(0,-2,1));search.addView(route);gap(search);
