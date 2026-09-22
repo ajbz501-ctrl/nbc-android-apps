@@ -1,4 +1,4 @@
-# NBC Android Apps v1.6.1 - API v9.12.0
+# NBC Android Apps v1.7.0 - API v9.12.1
 
 Two separate APKs are produced from this project:
 
@@ -6,6 +6,16 @@ Two separate APKs are produced from this project:
 - `operationsDebug` — capability-gated assigned runs, run detail/manifest, ticket validation/check-in/boarding, Bus Pass validation, authorized station sales, and live-run controls.
 
 The app uses API v9.12.0 and posts Odoo JSON-RPC requests to `https://nationalbusbelize.com` with the session cookie returned by `/web/session/authenticate`. Users enter only email/username and password; the Odoo database is resolved internally.
+
+## v1.7.0 passenger payments
+
+- Unified Passenger Pay Now for owned bookings and Bus Passes.
+- Live payment-method discovery from NBC.
+- DigiWallet TAC/OTP initiation and confirmation.
+- E-Kyash and Belize Bank provider initiation with secure in-app hosted payment view.
+- Server-authoritative payment status refresh and ticket access after confirmation.
+- Correct booking totals and balances without `NaN` display values.
+- Cash, station card, and account/credit remain capability-gated Operations flows.
 
 ## v1.6.1 connectivity fix
 
