@@ -14,6 +14,7 @@ public final class ApiClient {
     private final Context context; private final SharedPreferences prefs; private final ExecutorService executor = Executors.newCachedThreadPool();
     public ApiClient(Context c) { context=c.getApplicationContext(); prefs=context.getSharedPreferences("nbc_session",0); }
     public boolean loggedIn() { return prefs.getString("cookie", "").length() > 0; }
+    public String baseUrl() { return BASE; }
     public void logout() { prefs.edit().clear().apply(); }
     public void call(String path, JSONObject params, Callback callback) {
         executor.execute(() -> { try { callback.done(request(path, params)); } catch(Exception e) { callback.error(e); } });

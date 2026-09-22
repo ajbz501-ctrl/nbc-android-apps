@@ -33,7 +33,7 @@ jobs:
       - name: Upload APKs
         uses: actions/upload-artifact@v4
         with:
-          name: NBC-Android-Apps-v1.4
+          name: NBC-Android-Apps-v1.6.0-API-v9.12.0
           path: |
             NBC_Android_Apps/app/build/outputs/apk/passenger/debug/app-passenger-debug.apk
             NBC_Android_Apps/app/build/outputs/apk/operations/debug/app-operations-debug.apk

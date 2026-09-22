@@ -1,13 +1,25 @@
-# NBC Android Apps v1.5.0 - API v9.9.1
+# NBC Android Apps v1.6.0 - API v9.12.0
 
 Two separate APKs are produced from this project:
 
-- `passengerDebug` — trip search, stop loading, ticket status, authenticated booking shell, and public board.
-- `operationsDebug` — secure Odoo session sign-in, assigned runs, manifest, ticket validation/check-in/boarding, and live-run start.
+- `passengerDebug` — passenger dashboard, trip search, authoritative fare quote, segment-aware seats, bookings, tickets, payments, Bus Pass purchase/QR, and station boards.
+- `operationsDebug` — capability-gated assigned runs, run detail/manifest, ticket validation/check-in/boarding, Bus Pass validation, authorized station sales, and live-run controls.
 
-The app uses the API guide v9.9.1 and posts Odoo JSON-RPC requests to `https://nationalbusbelize.com` with the session cookie returned by `/web/session/authenticate`. It does not open the website in a browser and does not collect card PAN/CVC data.
+The app uses API v9.12.0 and posts Odoo JSON-RPC requests to `https://nationalbusbelize.com` with the session cookie returned by `/web/session/authenticate`. Users enter only email/username and password; the Odoo database is resolved internally.
 
-## v1.5.0 passenger accounts
+## v1.6.0 API integration
+
+- Role and capability discovery through `/api/nbc/v1/mobile/capabilities`.
+- Passenger dashboard through `/api/nbc/v1/passenger/dashboard`.
+- Ownership-scoped tickets, bookings, and payments.
+- Server-authoritative fare quote and segment-aware seat refresh.
+- Bus Pass products, purchase, list, QR presentation, and Operations validation.
+- Operations run detail and manifest through `/api/nbc/v1/ops/run`.
+- Station sales appear only when `station_sales` is granted by the server.
+- The Passenger app never calls the staff-only station sale endpoint.
+- Payment and pass states are always treated as server-authoritative.
+
+## Passenger accounts
 
 - Public Passenger signup through `/api/nbc/v1/account/signup`.
 - Passenger profile, server-generated NBC account number, and real account QR.
