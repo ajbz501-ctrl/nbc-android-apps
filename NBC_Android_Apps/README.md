@@ -1,4 +1,4 @@
-# NBC Android Apps v1.7.0 - API v9.12.1
+# NBC Android Apps v1.7.1 - API v9.12.1
 
 Two separate APKs are produced from this project:
 
@@ -6,6 +6,15 @@ Two separate APKs are produced from this project:
 - `operationsDebug` — capability-gated assigned runs, run detail/manifest, ticket validation/check-in/boarding, Bus Pass validation, authorized station sales, and live-run controls.
 
 The app uses API v9.12.0 and posts Odoo JSON-RPC requests to `https://nationalbusbelize.com` with the session cookie returned by `/web/session/authenticate`. Users enter only email/username and password; the Odoo database is resolved internally.
+
+## v1.7.1 booking completion and seats
+
+- Segment-aware visual seat selection using the live seat map.
+- Available, unavailable, and selected seat states.
+- Required seat selection and immediate server recheck before booking.
+- Booking confirmation continues directly to Pay Now or View Bookings.
+- Shows all online and station payment options, including unavailable provider status.
+- Cash, station card, and NBC account/credit remain staff-confirmed station payments.
 
 ## v1.7.0 passenger payments
 
