@@ -32,10 +32,12 @@ public final class ApiClient {
         } catch(Exception e) { callback.error(e); } });
     }
     private String discoverDatabase() throws Exception {
-        URL url=new URL(BASE+"/web/database/list"); HttpURLConnection con=(HttpURLConnection)url.openConnection(); con.setRequestMethod("GET"); con.setConnectTimeout(8000); con.setReadTimeout(10000);
-        String raw=read(con.getInputStream());
-        try { JSONObject out=new JSONObject(raw); org.json.JSONArray result=out.optJSONArray("result"); if(result!=null&&result.length()>0) return result.optString(0,"nationalbusbelize"); } catch(Exception ignored) {}
-        return "nationalbusbelize";
+        URL url=new URL(BASE+"/web/database/list"); HttpURLConnection con=(HttpURLConnection)url.openConnection(); con.setRequestMethod("POST"); con.setDoOutput(true); con.setConnectTimeout(10000); con.setReadTimeout(15000); con.setRequestProperty("Content-Type","application/json");
+        JSONObject body=new JSONObject().put("jsonrpc","2.0").put("method","call").put("params",new JSONObject()).put("id",1); write(con,body.toString());
+        int code=con.getResponseCode(); String raw=read(code>=400?con.getErrorStream():con.getInputStream());
+        if(code>=400) throw new IOException("NBC sign-in service returned HTTP "+code);
+        try { JSONObject out=new JSONObject(raw); org.json.JSONArray result=out.optJSONArray("result"); if(result!=null&&result.length()>0)return result.getString(0); } catch(Exception ignored) {}
+        throw new IOException("NBC sign-in service did not return a database");
     }
     private JSONObject request(String path, JSONObject params) throws Exception {
         URL url=new URL(BASE+path); HttpURLConnection con=(HttpURLConnection)url.openConnection(); con.setRequestMethod("POST"); con.setDoOutput(true); con.setConnectTimeout(15000); con.setReadTimeout(25000); con.setRequestProperty("Content-Type","application/json");

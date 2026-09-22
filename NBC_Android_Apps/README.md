@@ -1,4 +1,4 @@
-# NBC Android Apps v1.6.0 - API v9.12.0
+# NBC Android Apps v1.6.1 - API v9.12.0
 
 Two separate APKs are produced from this project:
 
@@ -6,6 +6,12 @@ Two separate APKs are produced from this project:
 - `operationsDebug` — capability-gated assigned runs, run detail/manifest, ticket validation/check-in/boarding, Bus Pass validation, authorized station sales, and live-run controls.
 
 The app uses API v9.12.0 and posts Odoo JSON-RPC requests to `https://nationalbusbelize.com` with the session cookie returned by `/web/session/authenticate`. Users enter only email/username and password; the Odoo database is resolved internally.
+
+## v1.6.1 connectivity fix
+
+- Sign-in uses the configured NBC Odoo database directly and no longer depends on the disabled `/web/database/list` route.
+- Passenger trip search sends the API-required `YYYY-MM-DD` service date.
+- Search prevents identical boarding and destination stops and validates date formatting before calling the server.
 
 ## v1.6.0 API integration
 

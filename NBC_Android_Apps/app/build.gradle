@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android { namespace 'bz.nationalbus.nbc'; compileSdk 35
-    defaultConfig { applicationId 'bz.nationalbus.nbc'; minSdk 26; targetSdk 35; versionCode 160; versionName '1.6.0' }
+    defaultConfig { applicationId 'bz.nationalbus.nbc'; minSdk 26; targetSdk 35; versionCode 161; versionName '1.6.1' }
     flavorDimensions += 'edition'
     productFlavors {
         passenger { dimension 'edition'; applicationIdSuffix '.passenger'; versionNameSuffix '-passenger' }
