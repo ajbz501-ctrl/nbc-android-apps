@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android { namespace 'bz.nationalbus.nbc'; compileSdk 35
-    defaultConfig { applicationId 'bz.nationalbus.nbc'; minSdk 26; targetSdk 35; versionCode 172; versionName '1.7.2' }
+    defaultConfig { applicationId 'bz.nationalbus.nbc'; minSdk 26; targetSdk 35; versionCode 173; versionName '1.7.3' }
     flavorDimensions += 'edition'
     productFlavors {
         passenger { dimension 'edition'; applicationIdSuffix '.passenger'; versionNameSuffix '-passenger' }
@@ -12,4 +12,5 @@ android { namespace 'bz.nationalbus.nbc'; compileSdk 35
 
 dependencies {
     implementation 'com.google.zxing:core:3.5.3'
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
 }
