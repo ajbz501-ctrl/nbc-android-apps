@@ -1,4 +1,11 @@
-# NBC Android Apps v1.8.0 - API v9.12.2
+# NBC Android Apps v1.8.1 - API v9.12.2
+
+## v1.8.1 operations improvements
+
+- Scanner actions show a clean ticket result card instead of raw JSON.
+- Onboard sales require pickup and drop-off selections and submit their stop IDs.
+- Sale confirmation retains the passenger's pickup and drop-off points.
+- Form fields are taller, larger, and bold for easier handheld use.
 
 Two separate APKs are produced from this project:
 
@@ -53,18 +60,6 @@ The app uses API v9.12.2 and posts Odoo JSON-RPC requests to `https://nationalbu
 - Consolidated ticket QR, passenger-account QR, and Bus Pass scanning into one Operations Scanner hub.
 - Removed duplicate standalone Scanner / Validate Bus Pass / Passenger Account navigation entries; Bus Pass validation remains server-authoritative through the same scanner flow.
 
-## v1.8.0 full Bluetooth ticket printing
-
-- Prints ticket number, passenger, run, route, departure, seat, fare, payment, status, and issue time.
-- Uses a raster QR image for broad ESC/POS printer compatibility.
-- Prevents duplicate prints while a Bluetooth job is active.
-
-## v1.7.9 onboard ticket-sale fix
-
-- Reuses the numeric `trip_id` returned with the conductor's assigned run.
-- Resolves manually entered run numbers through `/api/nbc/v1/ops/run`.
-- Keeps the readable run code visible on the sale form and printed ticket.
-
 ## v1.7.8 street map and assigned run codes
 
 - Replaced the simplified Belize diagram with a recognizable interactive street map using MapLibre and OpenFreeMap.
@@ -73,6 +68,18 @@ The app uses API v9.12.2 and posts Odoo JSON-RPC requests to `https://nationalbu
 - Displays and accepts the API run number, such as `NBC-BZE-1815`, while preserving the internal numeric `trip_id`.
 - Resolves and verifies the run through `/api/nbc/v1/ops/run` before tracking starts.
 - Corrected live telemetry parameter names to `speed_kmh` and `accuracy_m` to match the NBC API.
+
+## v1.8.0 full Bluetooth ticket printing
+
+- Prints ticket number, passenger, run, route, departure, seat, fare, payment, status, and issue time.
+- Uses a raster QR image for broad ESC/POS printer compatibility.
+- Prevents duplicate prints while a Bluetooth job is active.
+
+## v1.7.9 onboard ticket-sale fix
+
+- Reuses the numeric `trip_id` returned with the conductor's assigned run instead of discarding it.
+- Resolves manually entered run numbers through `/api/nbc/v1/ops/run` rather than the legacy trips endpoint.
+- Keeps the readable run code, including `NBC-BZE-1815`, visible on the sale form and printed ticket.
 
 ## v1.7.1 booking completion and seats
 
