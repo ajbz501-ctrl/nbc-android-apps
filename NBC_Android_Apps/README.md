@@ -1,4 +1,4 @@
-# NBC Android Apps v1.7.8 - API v9.12.2
+# NBC Android Apps v1.7.9 - API v9.12.2
 
 Two separate APKs are produced from this project:
 
@@ -52,6 +52,12 @@ The app uses API v9.12.2 and posts Odoo JSON-RPC requests to `https://nationalbu
 - GPS updates move the existing marker in place instead of reloading the map on every location update.
 - Consolidated ticket QR, passenger-account QR, and Bus Pass scanning into one Operations Scanner hub.
 - Removed duplicate standalone Scanner / Validate Bus Pass / Passenger Account navigation entries; Bus Pass validation remains server-authoritative through the same scanner flow.
+
+## v1.7.9 onboard ticket-sale fix
+
+- Reuses the numeric `trip_id` returned with the conductor's assigned run.
+- Resolves manually entered run numbers through `/api/nbc/v1/ops/run`.
+- Keeps the readable run code visible on the sale form and printed ticket.
 
 ## v1.7.8 street map and assigned run codes
 
