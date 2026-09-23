@@ -1,4 +1,4 @@
-# NBC Android Apps v1.7.6 - API v9.12.2
+# NBC Android Apps v1.7.7 - API v9.12.2
 
 Two separate APKs are produced from this project:
 
@@ -31,9 +31,9 @@ The app uses API v9.12.2 and posts Odoo JSON-RPC requests to `https://nationalbu
 - Cash, card/POS and approved customer-account collection are available.
 - The server calculates fare, assigns/validates the seat and records the selling conductor.
 
-## v1.7.5 live map assigned run and 80mm printing
+## v1.7.5 live tracking assigned run and 80mm printing
 
-- Live OpenStreetMap display follows the Operations phone GPS position.
+- Live GPS display follows the Operations phone position.
 - Onboard ticket sales automatically load the conductor's assigned run.
 - Manual Trip ID entry is available only when no assignment is returned.
 - Paired Bluetooth ESC/POS printer selection with Android runtime permission.
@@ -45,6 +45,13 @@ The app uses API v9.12.2 and posts Odoo JSON-RPC requests to `https://nationalbu
 - Conductor sale accepts run codes such as `NBC-BZE-1815` and resolves them to the server trip ID.
 - Assigned-run loading displays the conductor's run code automatically.
 - GPS screen always shows a visible map panel and coordinate fallback while tiles load.
+
+## v1.7.7 map and scanner audit
+
+- Replaced blocked external OpenStreetMap tiles with an offline-safe NBC live map that always renders the GPS marker, accuracy radius, Belize route context, and live run label.
+- GPS updates move the existing marker in place instead of reloading the map on every location update.
+- Consolidated ticket QR, passenger-account QR, and Bus Pass scanning into one Operations Scanner hub.
+- Removed duplicate standalone Scanner / Validate Bus Pass / Passenger Account navigation entries; Bus Pass validation remains server-authoritative through the same scanner flow.
 
 ## v1.7.1 booking completion and seats
 
