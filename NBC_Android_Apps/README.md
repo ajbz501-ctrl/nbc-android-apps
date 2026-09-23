@@ -1,4 +1,4 @@
-# NBC Android Apps v1.7.7 - API v9.12.2
+# NBC Android Apps v1.7.8 - API v9.12.2
 
 Two separate APKs are produced from this project:
 
@@ -52,6 +52,15 @@ The app uses API v9.12.2 and posts Odoo JSON-RPC requests to `https://nationalbu
 - GPS updates move the existing marker in place instead of reloading the map on every location update.
 - Consolidated ticket QR, passenger-account QR, and Bus Pass scanning into one Operations Scanner hub.
 - Removed duplicate standalone Scanner / Validate Bus Pass / Passenger Account navigation entries; Bus Pass validation remains server-authoritative through the same scanner flow.
+
+## v1.7.8 street map and assigned run codes
+
+- Replaced the simplified Belize diagram with a recognizable interactive street map using MapLibre and OpenFreeMap.
+- Added an in-app GPS fallback that clearly shows coordinates if online map data cannot load.
+- Loads the logged-in conductor or driver's assigned run automatically from `/api/nbc/v1/ops/my_runs`.
+- Displays and accepts the API run number, such as `NBC-BZE-1815`, while preserving the internal numeric `trip_id`.
+- Resolves and verifies the run through `/api/nbc/v1/ops/run` before tracking starts.
+- Corrected live telemetry parameter names to `speed_kmh` and `accuracy_m` to match the NBC API.
 
 ## v1.7.1 booking completion and seats
 
