@@ -1,4 +1,4 @@
-# NBC Android Apps v1.7.3 - API v9.12.2
+# NBC Android Apps v1.7.4 - API v9.12.2
 
 Two separate APKs are produced from this project:
 
@@ -21,6 +21,15 @@ The app uses API v9.12.2 and posts Odoo JSON-RPC requests to `https://nationalbu
 - Precise-location runtime permission and phone GPS availability checks.
 - Live coordinates are posted to `/api/nbc/live/gps/update` while tracking is active.
 - Tracking sends latitude, longitude, accuracy, speed, heading and timestamp.
+
+## v1.7.4 embedded scanner and conductor sales
+
+- Replaces the separate camera activity with an embedded in-app QR scanner.
+- Camera pauses safely when leaving the scanner or pressing Back.
+- Conductors can sell onboard tickets through `/api/nbc/conductor/sell_ticket`.
+- Onboard sales support adult, child, senior and student fares.
+- Cash, card/POS and approved customer-account collection are available.
+- The server calculates fare, assigns/validates the seat and records the selling conductor.
 
 ## v1.7.1 booking completion and seats
 
