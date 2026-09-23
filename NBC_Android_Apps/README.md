@@ -1,4 +1,4 @@
-# NBC Android Apps v1.7.4 - API v9.12.2
+# NBC Android Apps v1.7.6 - API v9.12.2
 
 Two separate APKs are produced from this project:
 
@@ -30,6 +30,21 @@ The app uses API v9.12.2 and posts Odoo JSON-RPC requests to `https://nationalbu
 - Onboard sales support adult, child, senior and student fares.
 - Cash, card/POS and approved customer-account collection are available.
 - The server calculates fare, assigns/validates the seat and records the selling conductor.
+
+## v1.7.5 live map assigned run and 80mm printing
+
+- Live OpenStreetMap display follows the Operations phone GPS position.
+- Onboard ticket sales automatically load the conductor's assigned run.
+- Manual Trip ID entry is available only when no assignment is returned.
+- Paired Bluetooth ESC/POS printer selection with Android runtime permission.
+- Professional 80mm ticket output with passenger, run, route, seat, fare, payment and QR.
+
+## v1.7.6 scanner targets and run codes
+
+- Scanner menu now supports ticket QR, passenger-account QR, and Bus Pass QR.
+- Conductor sale accepts run codes such as `NBC-BZE-1815` and resolves them to the server trip ID.
+- Assigned-run loading displays the conductor's run code automatically.
+- GPS screen always shows a visible map panel and coordinate fallback while tiles load.
 
 ## v1.7.1 booking completion and seats
 
