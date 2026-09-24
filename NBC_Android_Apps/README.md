@@ -1,4 +1,11 @@
-# NBC Android Apps v1.8.1 - API v9.12.2
+# NBC Android Apps v1.8.2 - API v9.12.2
+
+## v1.8.2 live manifests and progress
+
+- Manifest lookup accepts visible run numbers such as `NBC-BZE-1815` and auto-loads the assigned run.
+- Dashboard run progress now comes from `/api/nbc/v1/ops/my_runs` and `/api/nbc/v1/ops/run` instead of static sample stops.
+- Stop status and scheduled/actual times refresh from the server.
+- User-facing dates use `D/M/YYYY`; times use 12-hour `h:mm AM/PM` in Belize time.
 
 ## v1.8.1 operations improvements
 
