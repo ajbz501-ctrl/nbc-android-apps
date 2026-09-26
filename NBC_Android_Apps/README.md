@@ -1,4 +1,15 @@
-# NBC Android Apps v1.8.2 - API v9.12.2
+# NBC Android Apps v1.9.0 - API v9.15.0
+
+## v1.9.0 API security and live services
+
+- Staff authorization now prefers `/api/nbc/v1/security/me` and renders tools from server-issued capabilities.
+- Supports `onboard_sales`, `ticket_scan`, `run_operations`, `gps_publish`, `live_fleet`, and `station_terminal`.
+- Adds the protected Operations live-fleet view with NBC-issued GPS lifecycle status and age.
+- Adds passenger-safe live run tracking through `/api/nbc/v1/live/run`; stale locations are not shown.
+- Adds passenger password-reset requests through `/api/nbc/v1/passenger/password/reset-request`.
+- Keeps visible run-number workflows such as `NBC-BZE-1815` for manifests, sales, GPS, and run detail.
+- Preserves live run progress, Belize date/time formatting, unified scanner, seat selection, payments, and full Bluetooth ticket printing.
+- Falls back to the legacy mobile-capabilities response when an older server does not expose `/security/me`.
 
 ## v1.8.2 live manifests and progress
 
@@ -19,7 +30,7 @@ Two separate APKs are produced from this project:
 - `passengerDebug` — passenger dashboard, trip search, authoritative fare quote, segment-aware seats, bookings, tickets, payments, Bus Pass purchase/QR, and station boards.
 - `operationsDebug` — capability-gated assigned runs, run detail/manifest, ticket validation/check-in/boarding, Bus Pass validation, authorized station sales, and live-run controls.
 
-The app uses API v9.12.2 and posts Odoo JSON-RPC requests to `https://nationalbusbelize.com` with the session cookie returned by `/web/session/authenticate`. Users enter only email/username and password; the Odoo database is resolved internally.
+The app uses API v9.15.0 and posts Odoo JSON-RPC requests to `https://nationalbusbelize.com` with the session cookie returned by `/web/session/authenticate`. Users enter only email/username and password; the Odoo database is resolved internally.
 
 ## v1.7.2 passenger seat booking security
 
