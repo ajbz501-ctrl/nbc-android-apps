@@ -33,7 +33,7 @@ jobs:
       - name: Upload APKs
         uses: actions/upload-artifact@v4
         with:
-          name: NBC-Android-Apps-v1.8.2-API-v9.12.2
+          name: NBC-Android-Apps-v1.9.0-API-v9.15.0
           path: |
             NBC_Android_Apps/app/build/outputs/apk/passenger/debug/app-passenger-debug.apk
             NBC_Android_Apps/app/build/outputs/apk/operations/debug/app-operations-debug.apk
@@ -41,10 +41,10 @@ jobs:
       - name: Publish compiled APKs to repository
         run: |
           mkdir -p dist
-          cp NBC_Android_Apps/app/build/outputs/apk/passenger/debug/app-passenger-debug.apk dist/NBC_Passenger_v1.8.1.apk
-          cp NBC_Android_Apps/app/build/outputs/apk/operations/debug/app-operations-debug.apk dist/NBC_Operations_v1.8.1.apk
+          cp NBC_Android_Apps/app/build/outputs/apk/passenger/debug/app-passenger-debug.apk dist/NBC_Passenger_v1.9.0.apk
+          cp NBC_Android_Apps/app/build/outputs/apk/operations/debug/app-operations-debug.apk dist/NBC_Operations_v1.9.0.apk
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dist/NBC_Passenger_v1.8.1.apk dist/NBC_Operations_v1.8.1.apk
-          git commit -m "Publish v1.8.1 compiled APKs" || exit 0
+          git add dist/NBC_Passenger_v1.9.0.apk dist/NBC_Operations_v1.9.0.apk
+          git commit -m "Publish v1.9.0 compiled APKs" || exit 0
           git push
